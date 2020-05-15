@@ -1,0 +1,7 @@
+Saul  Diosdado  11836 Male 4.884 saul.diosdado@navasotaisd.org 	9th 	Hispanic 	Harvard UCLA Texas Blinn
+John  Doe       32423 Male 1.231 john.doe@gmail.com 		10th    White 		Houston Princeton USC Berkley
+Jane  Doe       12311 Female 0.500 jane.doe@rocketmail.com 	11th    White 		Chicago UTI
+Ian   Campbelli 65848 Male 3.250 ian.cambelli@yahoo.com 	12th    White 		MiT Stanford
+Rocky Jei       92893 Female 3.100 rock.j@gmail.com 		9th     Asian 		HISD Keelen
+Some  Person    31279 Male 4.285 person.234@gmail.com 		10th    Hispanic 	John
+Tom   Brady     12569 Male 2.150 tom.goat@goatsr.us 		11th    White 		Patriot
