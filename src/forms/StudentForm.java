@@ -3,7 +3,6 @@ package forms;
 import project.Student;
 import javax.swing.JOptionPane;
 import main.Main;
-import view.ChecklistView;
 import view.StudentView;
 
 /**
@@ -12,19 +11,10 @@ import view.StudentView;
  */
 public class StudentForm extends javax.swing.JPanel {
     
-    private ChecklistView checklistView;
     private StudentView studentView;
     
     public StudentForm() {
         initComponents();
-    }
-    
-    /**
-     * Sets the checklist view.
-     * @param checklistView the checklist view to be updated.
-     */
-    public void setChecklistView(ChecklistView checklistView) {
-        this.checklistView = checklistView;
     }
     
     /**
@@ -351,8 +341,6 @@ public class StudentForm extends javax.swing.JPanel {
             }
             
             Main.studentData.add(student);
-            
-            checklistView.update();
             studentView.update();
             
             infoMessage("Student creation successful.");

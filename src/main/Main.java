@@ -1,16 +1,9 @@
 package main;
 
-import forms.EmailForm;
-import forms.ScholarshipForm;
-import forms.SeniorForm;
 import forms.StudentForm;
 import project.Student;
 import project.Scholarship;
 import project.Email;
-import view.CreateView;
-import view.ChecklistView;
-import view.ScholarshipView;
-import view.StudentView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,21 +15,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JScrollPane;
 
 /**
  *
  * @author Saul Diosdado
  */
 public class Main extends javax.swing.JFrame {
-    
-    private StudentForm studentForm;
-    private ScholarshipForm scholarshipForm;
-    private EmailForm emailForm;
-    
-    private ChecklistView checklistView;
-    private CreateView createView;
-    private StudentView studentView;
     
     public static ArrayList<Student> studentData = new ArrayList<Student>();
     public static ArrayList<Scholarship> scholarData = new ArrayList<Scholarship>();
@@ -56,7 +40,6 @@ public class Main extends javax.swing.JFrame {
         }
         
         initComponents();
-        initCustomComponents();
         this.setLocationRelativeTo(null);
     }
     
@@ -64,6 +47,13 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         mainTabbedPane = new javax.swing.JTabbedPane();
+        studentViewPanel = new view.StudentView();
+        scholarshipFilterPanel = new view.ScholarshipView();
+        createViewSplitPanel = new javax.swing.JSplitPane();
+        scholarshipFormPanel = new forms.ScholarshipForm();
+        studentFormPanel = new forms.StudentForm();
+        seniorForm1 = new forms.SeniorForm();
+        emailFormPanel = new forms.EmailForm();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -73,17 +63,27 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        mainTabbedPane.addTab("Student Search", studentViewPanel);
+        mainTabbedPane.addTab("Scholarship Search", scholarshipFilterPanel);
+
+        createViewSplitPanel.setRightComponent(scholarshipFormPanel);
+        createViewSplitPanel.setLeftComponent(studentFormPanel);
+
+        mainTabbedPane.addTab("Create Student/Scholarship", createViewSplitPanel);
+        mainTabbedPane.addTab("Senior Form", seniorForm1);
+        mainTabbedPane.addTab("Email", emailFormPanel);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(mainTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addComponent(mainTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         mainTabbedPane.getAccessibleContext().setAccessibleName("");
@@ -181,31 +181,6 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
-    public void initCustomComponents() {
-        studentForm = new StudentForm();
-        scholarshipForm = new ScholarshipForm();
-        emailForm = new EmailForm(this);
-        checklistView = new ChecklistView();
-        studentView = new StudentView();
-        
-        studentForm.setChecklistView(checklistView);
-        studentForm.setStudentView(studentView);
-        
-        checklistView.setParet(this);
-        
-        createView = new CreateView(studentForm, scholarshipForm);
-        JScrollPane pane = new JScrollPane();
-        pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        pane.setViewportView(new SeniorForm());
-        
-        mainTabbedPane.add(studentView, "Student Database");
-        mainTabbedPane.add(new ScholarshipView(), "Scholarship Filter");
-        mainTabbedPane.add(createView, "Create");
-        mainTabbedPane.add(checklistView, "Checklist");
-        mainTabbedPane.add(emailForm, "Email");
-        mainTabbedPane.add(pane, "Form");
-    }
-    
     public static void main(String args[]) {
         // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         try {
@@ -234,6 +209,13 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSplitPane createViewSplitPanel;
+    private forms.EmailForm emailFormPanel;
     private javax.swing.JTabbedPane mainTabbedPane;
+    private view.ScholarshipView scholarshipFilterPanel;
+    private forms.ScholarshipForm scholarshipFormPanel;
+    private forms.SeniorForm seniorForm1;
+    private forms.StudentForm studentFormPanel;
+    private view.StudentView studentViewPanel;
     // End of variables declaration//GEN-END:variables
 }

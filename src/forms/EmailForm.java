@@ -34,11 +34,10 @@ public class EmailForm extends javax.swing.JPanel {
      * Basic constructor.
      * @param parent the parent component.
      */
-    public EmailForm(JFrame parent) {
+    public EmailForm() {
         initComponents();
-        this.parent = parent;
         
-        searchDialog = new SearchDialog(parent, false);
+        searchDialog = new SearchDialog(this.parent, false);
         searchDialog.setReturnField(recipientsField);
         searchDialog.setReturnValue(SearchDialog.SEARCH_EMAIL);
         
@@ -66,10 +65,7 @@ public class EmailForm extends javax.swing.JPanel {
         addRecipientsButton = new javax.swing.JButton();
         loginButton = new javax.swing.JButton();
 
-        bodyArea.setColumns(20);
         bodyArea.setLineWrap(true);
-        bodyArea.setRows(5);
-        bodyArea.setWrapStyleWord(true);
         bodyArea.setAutoscrolls(false);
         jScrollPane1.setViewportView(bodyArea);
 
@@ -128,7 +124,7 @@ public class EmailForm extends javax.swing.JPanel {
                         .addComponent(sendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panelSeparator)
                     .addGroup(mainFrameLayout.createSequentialGroup()
-                        .addComponent(bodyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                        .addComponent(bodyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(360, 360, 360))
                     .addGroup(mainFrameLayout.createSequentialGroup()
                         .addComponent(recipientsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -230,7 +226,7 @@ public class EmailForm extends javax.swing.JPanel {
 
                     String subject = subjectField.getText();
                     String body = bodyArea.getText();
-
+                    
                     Main.email.sendEmail(recipients, subject, body);
                     
                     infoMessage("Email sent successfully.");
@@ -262,7 +258,7 @@ public class EmailForm extends javax.swing.JPanel {
     }//GEN-LAST:event_addRecipientsButtonActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        new LoginDialog(parent, true, senderField).display(parent);
+        new LoginDialog(this.parent, true, senderField).display(this.parent);
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private boolean emptyFields() {
