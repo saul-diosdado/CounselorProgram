@@ -13,13 +13,9 @@ import project.Student;
 public class ScholarshipView extends javax.swing.JPanel {
     
     private Scholarship scholarship;
-    private ScholarshipEditView scholarEdit = new ScholarshipEditView();
 
     public ScholarshipView() {
         initComponents();
-        editPanel.add(scholarEdit);
-        editPanel.updateUI();
-        
         for (int i = 0; i < Main.scholarData.size(); i++) {
             scholarshipCombo.addItem(Main.scholarData.get(i).getName());
         }
@@ -39,16 +35,20 @@ public class ScholarshipView extends javax.swing.JPanel {
         studentPanel = new javax.swing.JPanel();
         resultsLabel = new javax.swing.JLabel();
         sidePanel = new javax.swing.JPanel();
-        scholarshipCombo = new javax.swing.JComboBox<>();
-        refreshButton = new javax.swing.JButton();
-        filterButton = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
-        editPanel = new javax.swing.JPanel();
+        selectScholarshipPanel = new javax.swing.JPanel();
         resetButton = new javax.swing.JButton();
+        filterButton = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
+        scholarshipCombo = new javax.swing.JComboBox<>();
+        scholarEdit = new view.ScholarshipEditView();
+
+        filterPanel.setPreferredSize(new java.awt.Dimension(360, 50));
 
         studentPanel.setLayout(new javax.swing.BoxLayout(studentPanel, javax.swing.BoxLayout.Y_AXIS));
         studentScrollPane.setViewportView(studentPanel);
 
+        resultsLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         resultsLabel.setText("Qualifying Students: 0");
 
         javax.swing.GroupLayout filterPanelLayout = new javax.swing.GroupLayout(filterPanel);
@@ -58,7 +58,7 @@ public class ScholarshipView extends javax.swing.JPanel {
             .addComponent(studentScrollPane, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(filterPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(resultsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+                .addComponent(resultsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                 .addContainerGap())
         );
         filterPanelLayout.setVerticalGroup(
@@ -71,16 +71,14 @@ public class ScholarshipView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        scholarshipCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                scholarshipComboActionPerformed(evt);
-            }
-        });
+        titleLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("Scholarship Filter");
 
-        refreshButton.setText("Refresh");
-        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+        resetButton.setText("Reset");
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshButtonActionPerformed(evt);
+                resetButtonActionPerformed(evt);
             }
         });
 
@@ -91,18 +89,47 @@ public class ScholarshipView extends javax.swing.JPanel {
             }
         });
 
-        titleLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLabel.setText("Scholarship Filter");
-
-        editPanel.setLayout(new java.awt.GridLayout(1, 0));
-
-        resetButton.setText("Reset");
-        resetButton.addActionListener(new java.awt.event.ActionListener() {
+        refreshButton.setText("Refresh");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetButtonActionPerformed(evt);
+                refreshButtonActionPerformed(evt);
             }
         });
+
+        scholarshipCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                scholarshipComboActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout selectScholarshipPanelLayout = new javax.swing.GroupLayout(selectScholarshipPanel);
+        selectScholarshipPanel.setLayout(selectScholarshipPanelLayout);
+        selectScholarshipPanelLayout.setHorizontalGroup(
+            selectScholarshipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(selectScholarshipPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(selectScholarshipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scholarshipCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(selectScholarshipPanelLayout.createSequentialGroup()
+                        .addComponent(refreshButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(resetButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(filterButton, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        selectScholarshipPanelLayout.setVerticalGroup(
+            selectScholarshipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(selectScholarshipPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scholarshipCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(selectScholarshipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(refreshButton)
+                    .addComponent(filterButton)
+                    .addComponent(resetButton))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
@@ -111,15 +138,9 @@ public class ScholarshipView extends javax.swing.JPanel {
             .addGroup(sidePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(editPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scholarshipCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(sidePanelLayout.createSequentialGroup()
-                        .addComponent(refreshButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(resetButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(filterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
+                    .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectScholarshipPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scholarEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         sidePanelLayout.setVerticalGroup(
@@ -128,15 +149,10 @@ public class ScholarshipView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scholarshipCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(selectScholarshipPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(refreshButton)
-                    .addComponent(filterButton)
-                    .addComponent(resetButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(editPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(scholarEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -145,9 +161,9 @@ public class ScholarshipView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(filterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(filterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -156,7 +172,7 @@ public class ScholarshipView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(sidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(filterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(filterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -260,14 +276,31 @@ public class ScholarshipView extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel editPanel;
+    private javax.swing.JComboBox<String> ethnicityCombo;
+    private javax.swing.JLabel ethnicityLabel;
     private javax.swing.JButton filterButton;
     private javax.swing.JPanel filterPanel;
+    private javax.swing.JComboBox<String> genderCombo;
+    private javax.swing.JLabel genderLabel;
+    private javax.swing.JTextField gpaField;
+    private javax.swing.JLabel gpaLabel;
+    private javax.swing.JPanel mainPanel;
+    private javax.swing.JTextField nameField;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JTextArea notesArea;
+    private javax.swing.JLabel notesLabel;
+    private javax.swing.JScrollPane notesPane;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton resetButton;
     private javax.swing.JLabel resultsLabel;
+    private javax.swing.JTextField rewardField;
+    private javax.swing.JLabel rewardLabel;
+    private view.ScholarshipEditView scholarEdit;
     private javax.swing.JComboBox<String> scholarshipCombo;
+    private javax.swing.JPanel selectScholarshipPanel;
     private javax.swing.JPanel sidePanel;
+    private javax.swing.JTextField sponsorField;
+    private javax.swing.JLabel sponsorLabel;
     private javax.swing.JPanel studentPanel;
     private javax.swing.JScrollPane studentScrollPane;
     private javax.swing.JLabel titleLabel;
