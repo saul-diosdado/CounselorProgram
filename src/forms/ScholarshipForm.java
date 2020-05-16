@@ -22,55 +22,29 @@ public class ScholarshipForm extends javax.swing.JPanel {
     private void initComponents() {
 
         mainFrame = new javax.swing.JPanel();
+        enclosingPanel = new javax.swing.JPanel();
         scholarshipLabel = new javax.swing.JLabel();
-        nameLabel = new javax.swing.JLabel();
-        nameField = new javax.swing.JTextField();
-        valueLabel = new javax.swing.JLabel();
-        valueField = new javax.swing.JTextField();
-        sponsorLabel = new javax.swing.JLabel();
-        sponsorField = new javax.swing.JTextField();
-        monetaryBox = new javax.swing.JCheckBox();
-        rewardLabel = new javax.swing.JLabel();
         rewardField = new javax.swing.JTextField();
+        nameField = new javax.swing.JTextField();
+        sponsorLabel = new javax.swing.JLabel();
+        createButton = new javax.swing.JButton();
+        rewardLabel = new javax.swing.JLabel();
+        requirmentsButton = new javax.swing.JButton();
+        valueLabel = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
         notesLabel = new javax.swing.JLabel();
+        valueField = new javax.swing.JTextField();
         notesPane = new javax.swing.JScrollPane();
         notesArea = new javax.swing.JTextArea();
-        requirmentsButton = new javax.swing.JButton();
-        createButton = new javax.swing.JButton();
+        monetaryBox = new javax.swing.JCheckBox();
+        sponsorField = new javax.swing.JTextField();
 
         scholarshipLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         scholarshipLabel.setText("Scholarship Information");
 
-        nameLabel.setLabelFor(nameField);
-        nameLabel.setText("Name");
-
-        valueLabel.setText("Value");
-
-        sponsorLabel.setText("Sponsor");
-
-        monetaryBox.setText("Non-monetary value");
-        monetaryBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                monetaryBoxItemStateChanged(evt);
-            }
-        });
-
-        rewardLabel.setText("Reward");
-
         rewardField.setEnabled(false);
 
-        notesLabel.setText("Notes");
-
-        notesArea.setColumns(20);
-        notesArea.setRows(5);
-        notesPane.setViewportView(notesArea);
-
-        requirmentsButton.setText("Set Requirements");
-        requirmentsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                requirmentsButtonActionPerformed(evt);
-            }
-        });
+        sponsorLabel.setText("Sponsor");
 
         createButton.setText("Create Scholarship");
         createButton.addActionListener(new java.awt.event.ActionListener() {
@@ -79,17 +53,44 @@ public class ScholarshipForm extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout mainFrameLayout = new javax.swing.GroupLayout(mainFrame);
-        mainFrame.setLayout(mainFrameLayout);
-        mainFrameLayout.setHorizontalGroup(
-            mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainFrameLayout.createSequentialGroup()
+        rewardLabel.setText("Reward");
+
+        requirmentsButton.setText("Set Requirements");
+        requirmentsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requirmentsButtonActionPerformed(evt);
+            }
+        });
+
+        valueLabel.setText("Value");
+
+        nameLabel.setLabelFor(nameField);
+        nameLabel.setText("Name");
+
+        notesLabel.setText("Notes");
+
+        notesArea.setColumns(20);
+        notesArea.setRows(5);
+        notesPane.setViewportView(notesArea);
+
+        monetaryBox.setText("Non-monetary value");
+        monetaryBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                monetaryBoxItemStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout enclosingPanelLayout = new javax.swing.GroupLayout(enclosingPanel);
+        enclosingPanel.setLayout(enclosingPanelLayout);
+        enclosingPanelLayout.setHorizontalGroup(
+            enclosingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(enclosingPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(enclosingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sponsorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(scholarshipLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sponsorField)
-                    .addGroup(mainFrameLayout.createSequentialGroup()
+                    .addGroup(enclosingPanelLayout.createSequentialGroup()
                         .addComponent(monetaryBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(valueLabel)
@@ -100,30 +101,28 @@ public class ScholarshipForm extends javax.swing.JPanel {
                     .addComponent(notesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(notesPane, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nameField)
-                    .addGroup(mainFrameLayout.createSequentialGroup()
-                        .addComponent(nameLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(mainFrameLayout.createSequentialGroup()
+                    .addGroup(enclosingPanelLayout.createSequentialGroup()
                         .addComponent(requirmentsButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(createButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(createButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        mainFrameLayout.setVerticalGroup(
-            mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainFrameLayout.createSequentialGroup()
+        enclosingPanelLayout.setVerticalGroup(
+            enclosingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(enclosingPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scholarshipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scholarshipLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(sponsorLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sponsorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(enclosingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(monetaryBox)
                     .addComponent(valueLabel)
                     .addComponent(valueField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -134,12 +133,26 @@ public class ScholarshipForm extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(notesLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(notesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                .addComponent(notesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(enclosingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(requirmentsButton)
                     .addComponent(createButton))
                 .addContainerGap())
+        );
+
+        javax.swing.GroupLayout mainFrameLayout = new javax.swing.GroupLayout(mainFrame);
+        mainFrame.setLayout(mainFrameLayout);
+        mainFrameLayout.setHorizontalGroup(
+            mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(enclosingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        mainFrameLayout.setVerticalGroup(
+            mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(enclosingPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -239,6 +252,7 @@ public class ScholarshipForm extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createButton;
+    private javax.swing.JPanel enclosingPanel;
     private javax.swing.JPanel mainFrame;
     private javax.swing.JCheckBox monetaryBox;
     private javax.swing.JTextField nameField;

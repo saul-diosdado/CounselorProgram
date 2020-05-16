@@ -51,12 +51,17 @@ public class Main extends javax.swing.JFrame {
         createViewSplitPanel = new javax.swing.JSplitPane();
         scholarshipFormPanel = new forms.ScholarshipForm();
         studentFormPanel = new forms.StudentForm();
-        seniorForm1 = new forms.SeniorForm();
+        seniorForm = new forms.SeniorForm();
         emailFormPanel = new forms.EmailForm();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(765, 600));
         setPreferredSize(new java.awt.Dimension(750, 600));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -66,11 +71,13 @@ public class Main extends javax.swing.JFrame {
         mainTabbedPane.addTab("Student Search", studentViewPanel);
         mainTabbedPane.addTab("Scholarship Search", scholarshipFilterPanel);
 
+        createViewSplitPanel.setDividerLocation(createViewSplitPanel.getWidth() / 2);
+        createViewSplitPanel.setDividerSize(1);
         createViewSplitPanel.setRightComponent(scholarshipFormPanel);
         createViewSplitPanel.setLeftComponent(studentFormPanel);
 
         mainTabbedPane.addTab("Create Student/Scholarship", createViewSplitPanel);
-        mainTabbedPane.addTab("Senior Form", seniorForm1);
+        mainTabbedPane.addTab("Senior Form", seniorForm);
         mainTabbedPane.addTab("Email", emailFormPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -82,7 +89,7 @@ public class Main extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(mainTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                .addComponent(mainTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -181,6 +188,11 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        createViewSplitPanel.setDividerLocation(createViewSplitPanel.getWidth() / 2);
+        createViewSplitPanel.updateUI();
+    }//GEN-LAST:event_formComponentResized
+
     public static void main(String args[]) {
         // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         try {
@@ -214,7 +226,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTabbedPane mainTabbedPane;
     private view.ScholarshipView scholarshipFilterPanel;
     private forms.ScholarshipForm scholarshipFormPanel;
-    private forms.SeniorForm seniorForm1;
+    private forms.SeniorForm seniorForm;
     private forms.StudentForm studentFormPanel;
     private view.StudentView studentViewPanel;
     // End of variables declaration//GEN-END:variables

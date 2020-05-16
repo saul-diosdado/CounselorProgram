@@ -49,11 +49,11 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="studentButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="studentID" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="studentBox" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="studentBox" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
