@@ -1,14 +1,6 @@
 package project;
 
-import view.ChecklistPanel;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 
 /**
  * Student class used for every student in the database.
@@ -33,7 +25,6 @@ public class Student implements java.io.Serializable {
     public Student(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        initChecklistComponents();
     }
     
     // <editor-fold defaultstate="collapsed" desc="Basic Info Getters and Setters">
@@ -64,7 +55,6 @@ public class Student implements java.io.Serializable {
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-        update();
     }
     
     /**
@@ -81,7 +71,6 @@ public class Student implements java.io.Serializable {
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
-        update();
     }
     
     /**
@@ -130,7 +119,6 @@ public class Student implements java.io.Serializable {
      */
     public void setID(String idNumber) {
         this.idNumber = idNumber;
-        update();
     }
 
     /**
@@ -235,6 +223,11 @@ public class Student implements java.io.Serializable {
     }
     // </editor-fold>  
     
+    /**
+     * Returns a string of the college name of the student at an index.
+     * @param index the index of the college.
+     * @return String of the college name.
+     */
     public String getCollege(int index) {
         return colleges.get(index);
     }
@@ -245,7 +238,6 @@ public class Student implements java.io.Serializable {
      */
     public void addCollege(String college) {
         colleges.add(college);
-        updateChecklist();
     }
     
     /**
@@ -255,71 +247,11 @@ public class Student implements java.io.Serializable {
      * @param college the college to be removed from the list.
      */
     public void removeCollege(String college) {
-        try {
-            if (!colleges.remove(college)) {
-                throw new Exception();
-            }
-            
-            updateChecklist();
-        } catch (Exception e) {
-            errorMessage("College not found.");
-        }
+        colleges.remove(college);
     }
     
     public int getCollegeSize() {
         return colleges.size();
-    }
-    
-    /**
-     * Method to return the student's checklist panel containing the colleges
-     * checklist.
-     * @return checklistPanel
-     */
-    public JPanel getChecklistPanel() {
-        return checklistPanel;
-    }
-    
-    // <editor-fold defaultstate="collapsed" desc="Checklist Components">
-    // Start of the checklist student panel.
-    private JPanel checklistPanel;
-    private ArrayList<ChecklistPanel> checklistPanels;
-    
-    private void initChecklistComponents() {
-        checklistPanel = new JPanel();
-        checklistPanels = new ArrayList<ChecklistPanel>();
-        
-        checklistPanel.setLayout(new GridLayout(0, 1));
-        checklistPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK, 2), this.getName(),
-                TitledBorder.LEFT, TitledBorder.LEFT, new Font("Dialog", Font.BOLD, 16)));
-        
-        for (int i = 0; i < colleges.size(); i++) {
-            checklistPanels.add(new ChecklistPanel(colleges.get(i)));
-            checklistPanel.add(checklistPanels.get(i));
-        }
-    }
-    // </editor-fold>
-    
-    private void update() {
-        updateChecklistPanel();
-    }
-    
-    private void updateChecklistPanel() {
-        checklistPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK, 2), this.getName(),
-                TitledBorder.LEFT, TitledBorder.LEFT, new Font("Dialog", Font.BOLD, 16)));
-    }
-    
-    private void updateChecklist() {
-        checklistPanels.clear();
-        checklistPanel.removeAll();
-        for (int i = 0; i < colleges.size(); i++) {
-            checklistPanels.add(new ChecklistPanel(colleges.get(i)));
-            checklistPanel.add(checklistPanels.get(i));
-        }
-        checklistPanel.updateUI();
-    }
-    
-    private void errorMessage(String message) {
-        JOptionPane.showMessageDialog(null, "Error - " + message, "Error Dialog", JOptionPane.ERROR_MESSAGE);
     }
     
 }

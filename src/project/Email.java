@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMessage;
  * gmail host.
  * @author Saul Diosdado
  */
-public class Email implements java.io.Serializable {
+public class Email {
     
     private final Properties PROP = System.getProperties();
     private final String HOST = "smtp.gmail.com";

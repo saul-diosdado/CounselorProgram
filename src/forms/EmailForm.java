@@ -50,7 +50,7 @@ public class EmailForm extends javax.swing.JPanel {
     private void initComponents() {
 
         mainFrame = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scrollBodyPane = new javax.swing.JScrollPane();
         bodyArea = new javax.swing.JTextArea();
         subjectLabel = new javax.swing.JLabel();
         recipientsField = new javax.swing.JTextField();
@@ -67,7 +67,12 @@ public class EmailForm extends javax.swing.JPanel {
 
         bodyArea.setLineWrap(true);
         bodyArea.setAutoscrolls(false);
-        jScrollPane1.setViewportView(bodyArea);
+        bodyArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                bodyAreaKeyPressed(evt);
+            }
+        });
+        scrollBodyPane.setViewportView(bodyArea);
 
         subjectLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         subjectLabel.setText("Subject");
@@ -135,7 +140,7 @@ public class EmailForm extends javax.swing.JPanel {
                     .addGroup(mainFrameLayout.createSequentialGroup()
                         .addComponent(subjectLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(346, 346, 346))
-                    .addComponent(jScrollPane1)
+                    .addComponent(scrollBodyPane)
                     .addComponent(subjectField)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainFrameLayout.createSequentialGroup()
                         .addGroup(mainFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -174,7 +179,7 @@ public class EmailForm extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bodyLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                .addComponent(scrollBodyPane, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sendButton)
                 .addContainerGap())
@@ -208,16 +213,13 @@ public class EmailForm extends javax.swing.JPanel {
             @Override
             protected Void doInBackground() throws Exception {
                 try {
-                    Thread.sleep(500);
-                    
                     if (emptyFields()) {
                         throw new Exception("Empty fields.");
                     }
                     
-                    Thread.sleep(250);
+                    Thread.sleep(1500);
                     
                     ArrayList<String> recipients = new ArrayList<String>();
-                    
                     Scanner emailScan = new Scanner(recipientsField.getText());
                     while (emailScan.hasNext()) {
                         recipients.add(emailScan.next());
@@ -226,20 +228,18 @@ public class EmailForm extends javax.swing.JPanel {
 
                     String subject = subjectField.getText();
                     String body = bodyArea.getText();
-                    
                     Main.email.sendEmail(recipients, subject, body);
                     
                     infoMessage("Email sent successfully.");
                     clearAll();
                 } catch (AuthenticationFailedException afe) {
-                    errorMessage("Sender credintials authentication failed.");
+                    errorMessage("Sender credintial authentication failed.");
                 } catch (AddressException ae) {
                     errorMessage("Invalid sender address.");
                 } catch (MessagingException ex) {
                     Logger.getLogger(EmailForm.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (Exception e) {
-                    System.out.println("An exception occured!");
-                    System.out.println(e.getMessage());
+                    e.printStackTrace();
                 }
                 
                 return null;
@@ -260,6 +260,12 @@ public class EmailForm extends javax.swing.JPanel {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         new LoginDialog(this.parent, true, senderField).display(this.parent);
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void bodyAreaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bodyAreaKeyPressed
+        if (evt.isControlDown() && evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            sendButton.doClick();
+        }
+    }//GEN-LAST:event_bodyAreaKeyPressed
 
     private boolean emptyFields() {
         return senderField.getText().isEmpty() || recipientsField.getText().isEmpty() || bodyArea.getText().isEmpty();
@@ -283,12 +289,12 @@ public class EmailForm extends javax.swing.JPanel {
     private javax.swing.JButton addRecipientsButton;
     private javax.swing.JTextArea bodyArea;
     private javax.swing.JLabel bodyLabel;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton loginButton;
     private javax.swing.JPanel mainFrame;
     private javax.swing.JSeparator panelSeparator;
     private javax.swing.JTextField recipientsField;
     private javax.swing.JLabel recipientsLabel;
+    private javax.swing.JScrollPane scrollBodyPane;
     private javax.swing.JButton sendButton;
     private javax.swing.JTextField senderField;
     private javax.swing.JLabel senderLabel;
