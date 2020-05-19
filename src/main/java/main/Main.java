@@ -2,7 +2,6 @@ package main;
 
 import project.Student;
 import project.Scholarship;
-import project.Email;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -23,7 +22,6 @@ public class Main extends javax.swing.JFrame {
     
     public static ArrayList<Student> studentData = new ArrayList<Student>();
     public static ArrayList<Scholarship> scholarData = new ArrayList<Scholarship>();
-    public static Email email = new Email();
     
     private final File STUDENTS_FILE = new File("studentdata.txt");
     private final File SCHOLAR_FILE = new File("scholardata.txt");
@@ -46,13 +44,13 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         mainTabbedPane = new javax.swing.JTabbedPane();
-        studentViewPanel = new view.StudentView();
-        scholarshipFilterPanel = new view.ScholarshipView();
+        studentView = new view.StudentView();
+        scholarshipView = new view.ScholarshipView();
         createViewSplitPanel = new javax.swing.JSplitPane();
-        scholarshipFormPanel = new forms.ScholarshipForm();
-        studentFormPanel = new forms.StudentForm();
+        studentForm = new forms.StudentForm();
+        scholarshipForm = new forms.ScholarshipForm();
         seniorForm = new forms.SeniorForm();
-        emailFormPanel = new forms.EmailForm();
+        emailForm = new forms.EmailForm();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(765, 600));
@@ -68,23 +66,23 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        mainTabbedPane.addTab("Student Search", studentViewPanel);
-        mainTabbedPane.addTab("Scholarship Search", scholarshipFilterPanel);
+        mainTabbedPane.addTab("Student Search", studentView);
+        mainTabbedPane.addTab("Scholarship Filter", scholarshipView);
 
         createViewSplitPanel.setDividerLocation(createViewSplitPanel.getWidth() / 2);
         createViewSplitPanel.setDividerSize(1);
-        createViewSplitPanel.setRightComponent(scholarshipFormPanel);
-        createViewSplitPanel.setLeftComponent(studentFormPanel);
+        createViewSplitPanel.setLeftComponent(studentForm);
+        createViewSplitPanel.setRightComponent(scholarshipForm);
 
         mainTabbedPane.addTab("Create Student/Scholarship", createViewSplitPanel);
         mainTabbedPane.addTab("Senior Form", seniorForm);
-        mainTabbedPane.addTab("Email", emailFormPanel);
+        mainTabbedPane.addTab("Email", emailForm);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainTabbedPane)
+            .addComponent(mainTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 765, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,12 +220,12 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSplitPane createViewSplitPanel;
-    private forms.EmailForm emailFormPanel;
+    private forms.EmailForm emailForm;
     private javax.swing.JTabbedPane mainTabbedPane;
-    private view.ScholarshipView scholarshipFilterPanel;
-    private forms.ScholarshipForm scholarshipFormPanel;
+    private forms.ScholarshipForm scholarshipForm;
+    private view.ScholarshipView scholarshipView;
     private forms.SeniorForm seniorForm;
-    private forms.StudentForm studentFormPanel;
-    private view.StudentView studentViewPanel;
+    private forms.StudentForm studentForm;
+    private view.StudentView studentView;
     // End of variables declaration//GEN-END:variables
 }
