@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.awt.event.ItemEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import main.Main;
 
 /**
  * Gmail login dialog for changing the program's email classes login credentials.
@@ -78,7 +77,7 @@ public class LoginDialog extends javax.swing.JDialog {
         gmailLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         gmailLabel.setText("Gmail Login");
 
-        passwordField.setEchoChar('â€¢');
+        passwordField.setEchoChar('•');
         passwordField.setFocusAccelerator('\'');
 
         showBox.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
@@ -163,7 +162,7 @@ public class LoginDialog extends javax.swing.JDialog {
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             passwordField.setEchoChar((char) 0);
         } else {
-             passwordField.setEchoChar('â€¢');
+             passwordField.setEchoChar('•');
         }
     }//GEN-LAST:event_showBoxItemStateChanged
 
@@ -181,7 +180,6 @@ public class LoginDialog extends javax.swing.JDialog {
                 throw new Exception("Empty fields.");
             }
             
-            Main.email.setUser(emailAddress, password.toString());
             if (senderField != null) {
                 senderField.setText(emailAddress);
             }

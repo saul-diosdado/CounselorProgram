@@ -2,20 +2,10 @@ package forms;
 
 import dialog.LoginDialog;
 import dialog.SearchDialog;
-import project.Email;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.mail.AuthenticationFailedException;
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
-import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
-import main.Main;
 
 /**
  * Email form used as a GUI for sending emails via Gmail. This class will use
@@ -28,7 +18,6 @@ public class EmailForm extends javax.swing.JPanel {
     
     private JFrame parent;
     private SearchDialog searchDialog;
-    private ImageIcon loadingIcon = new ImageIcon(getClass().getResource("/icons/Loading.gif"));
     
     /**
      * Basic constructor.
@@ -40,10 +29,6 @@ public class EmailForm extends javax.swing.JPanel {
         searchDialog = new SearchDialog(this.parent, false);
         searchDialog.setReturnField(recipientsField);
         searchDialog.setReturnValue(SearchDialog.SEARCH_EMAIL);
-        
-        if (Main.email.hasUser()) {
-            senderField.setText(Main.email.getUser());
-        }
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -109,7 +94,6 @@ public class EmailForm extends javax.swing.JPanel {
         });
 
         loginButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Mail.png"))); // NOI18N
         loginButton.setFocusable(false);
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,41 +190,13 @@ public class EmailForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
-        JOptionPane pane = new JOptionPane("Sending...", JOptionPane.INFORMATION_MESSAGE, JOptionPane.PLAIN_MESSAGE, loadingIcon);
+        JOptionPane pane = new JOptionPane("Sending...", JOptionPane.INFORMATION_MESSAGE, JOptionPane.PLAIN_MESSAGE);
         final JDialog LOADING_DIALOG = pane.createDialog(this, "Dialog");
         
         new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() throws Exception {
-                try {
-                    if (emptyFields()) {
-                        throw new Exception("Empty fields.");
-                    }
-                    
-                    Thread.sleep(1500);
-                    
-                    ArrayList<String> recipients = new ArrayList<String>();
-                    Scanner emailScan = new Scanner(recipientsField.getText());
-                    while (emailScan.hasNext()) {
-                        recipients.add(emailScan.next());
-                    }
-                    emailScan.close();
-
-                    String subject = subjectField.getText();
-                    String body = bodyArea.getText();
-                    Main.email.sendEmail(recipients, subject, body);
-                    
-                    infoMessage("Email sent successfully.");
-                    clearAll();
-                } catch (AuthenticationFailedException afe) {
-                    errorMessage("Sender credintial authentication failed.");
-                } catch (AddressException ae) {
-                    errorMessage("Invalid sender address.");
-                } catch (MessagingException ex) {
-                    Logger.getLogger(EmailForm.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                
                 
                 return null;
             }
