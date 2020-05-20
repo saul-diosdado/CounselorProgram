@@ -7,3 +7,6 @@ build/built-jar.properties
 
 # Ignore Gradle build output directory
 build
+src/main/resources/credentials.json
+tokens/StoredCredential
+src/main/resources/credentials.json

@@ -1,20 +1,54 @@
 package forms;
 
-import dialog.LoginDialog;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
+import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.util.Base64;
+import com.google.api.client.util.store.FileDataStoreFactory;
+import com.google.api.services.gmail.Gmail;
+import com.google.api.services.gmail.GmailScopes;
+import com.google.api.services.gmail.model.Message;
+
 import dialog.SearchDialog;
-import javax.swing.JDialog;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.security.GeneralSecurityException;
+import java.util.Collections;
+import java.util.List;
+import java.util.Properties;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  * Email form used as a GUI for sending emails via Gmail. This class will use
  * the user that is logged in as the default sender. Also contains a serialized
  * file with the user's login credentials.
- * @see Email
+ * Many of the methods implemented here are directly from the Google Gmail API
+ * documentation.
  * @author Saul Diosdado
  */
 public class EmailForm extends javax.swing.JPanel {
+    
+    private static final String APPLICATION_NAME = "Counselor Program";
+    private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+    private static final String TOKENS_DIRECTORY_PATH = "tokens";
+
+    private static final List<String> SCOPES = Collections.singletonList(GmailScopes.GMAIL_COMPOSE);
+    private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
+    private Gmail service;
     
     private JFrame parent;
     private SearchDialog searchDialog;
@@ -190,23 +224,31 @@ public class EmailForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
-        JOptionPane pane = new JOptionPane("Sending...", JOptionPane.INFORMATION_MESSAGE, JOptionPane.PLAIN_MESSAGE);
-        final JDialog LOADING_DIALOG = pane.createDialog(this, "Dialog");
-        
-        new SwingWorker<Void, Void>() {
-            @Override
-            protected Void doInBackground() throws Exception {
-                
-                
-                return null;
+        try {
+            if (emptyFields()) {
+                throw new Exception("Required fields are empty!");
             }
             
-            protected void done() {
-                LOADING_DIALOG.dispose();
-            };
-        }.execute();
+            // Gather email contents from form and from authorization.
+            String to = recipientsField.getText();
+            String from = service.users().getProfile("me").execute().getEmailAddress();
+            String subject = subjectField.getText();
+            String bodyText = bodyArea.getText();
 
-        LOADING_DIALOG.setVisible(true);
+            // Create and send the constructed email.
+            MimeMessage email = createEmail(to, from, subject, bodyText);
+            sendMessage(service, "me", email);
+            
+            // Notify user of successfull send and clear the form.
+            infoMessage("Email sent successfully!");
+            clearAllFields();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (MessagingException me) {
+            me.printStackTrace();
+        } catch (Exception e) {
+            errorMessage(e.getMessage());
+        }
     }//GEN-LAST:event_sendButtonActionPerformed
     
     private void addRecipientsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRecipientsButtonActionPerformed
@@ -214,7 +256,20 @@ public class EmailForm extends javax.swing.JPanel {
     }//GEN-LAST:event_addRecipientsButtonActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        new LoginDialog(this.parent, true, senderField).display(this.parent);
+        try {
+            // Build a new authorized API client service.
+            final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+            service = new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+                    .setApplicationName(APPLICATION_NAME)
+                    .build();
+            // Set the sender field to the email address that was just logged into.
+            senderField.setText(service.users().getProfile("me").execute().getEmailAddress());
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            errorMessage("User authorization failed!");
+        } catch (GeneralSecurityException gse) {
+            gse.printStackTrace();
+        }
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void bodyAreaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bodyAreaKeyPressed
@@ -223,6 +278,86 @@ public class EmailForm extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_bodyAreaKeyPressed
 
+    /**
+     * Creates an authorized Credential object.
+     * @param HTTP_TRANSPORT The network HTTP Transport.
+     * @return An authorized Credential object.
+     * @throws IOException If the credentials.json file cannot be found.
+     */
+    private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
+        // Load client secrets.
+        InputStream in = EmailForm.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+        if (in == null) {
+            throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
+        }
+        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+
+        // Build flow and trigger user authorization request.
+        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+                HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
+                .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
+                .setAccessType("online")
+                .build();
+        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
+        return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
+    }
+    
+    /**
+     * Create a MimeMessage using the parameters provided.
+     * @param to email address of the receiver
+     * @param from email address of the sender, the mailbox account
+     * @param subject subject of the email
+     * @param bodyText body text of the email
+     * @return the MimeMessage to be used to send email
+     * @throws MessagingException
+     */
+    public static MimeMessage createEmail(String to, String from, String subject, String bodyText) throws MessagingException {
+        Properties props = new Properties();
+        Session session = Session.getDefaultInstance(props, null);
+
+        MimeMessage email = new MimeMessage(session);
+
+        email.setFrom(new InternetAddress(from));
+        email.addRecipient(javax.mail.Message.RecipientType.TO,
+                new InternetAddress(to));
+        email.setSubject(subject);
+        email.setText(bodyText);
+        return email;
+    }
+    
+    /**
+     * Create a message from an email.
+     * @param emailContent Email to be set to raw of message
+     * @return a message containing a base64url encoded email
+     * @throws IOException
+     * @throws MessagingException
+     */
+    public static Message createMessageWithEmail(MimeMessage emailContent) throws MessagingException, IOException {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        emailContent.writeTo(buffer);
+        byte[] bytes = buffer.toByteArray();
+        String encodedEmail = Base64.encodeBase64URLSafeString(bytes);
+        Message message = new Message();
+        message.setRaw(encodedEmail);
+        return message;
+    }
+
+    /**
+     * Send an email from the user's mailbox to its recipient.
+     * @param service Authorized Gmail API instance.
+     * @param userId User's email address. The special value "me"
+     * can be used to indicate the authenticated user.
+     * @param emailContent Email to be sent.
+     * @return The sent message
+     * @throws MessagingException
+     * @throws IOException
+     */
+    public static Message sendMessage(Gmail service, String userId, MimeMessage emailContent) throws MessagingException, IOException {
+        Message message = createMessageWithEmail(emailContent);
+        message = service.users().messages().send(userId, message).execute();
+        return message;
+    }
+    
     private boolean emptyFields() {
         return senderField.getText().isEmpty() || recipientsField.getText().isEmpty() || bodyArea.getText().isEmpty();
     }
@@ -235,7 +370,7 @@ public class EmailForm extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Error - " + message, "Error Dialog", JOptionPane.ERROR_MESSAGE, null);
     }
     
-    private void clearAll() {
+    private void clearAllFields() {
         recipientsField.setText("");
         subjectField.setText("");
         bodyArea.setText("");
