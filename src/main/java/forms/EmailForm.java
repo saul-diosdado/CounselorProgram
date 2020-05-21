@@ -22,15 +22,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
+import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.SwingWorker;
 
 /**
  * Email form used as a GUI for sending emails via Gmail. This class will use
@@ -52,6 +57,7 @@ public class EmailForm extends javax.swing.JPanel {
     
     private JFrame parent;
     private SearchDialog searchDialog;
+    private final ImageIcon LOADING_ICON = new ImageIcon(getClass().getResource("/Loading.gif"));
     
     /**
      * Basic constructor.
@@ -128,6 +134,7 @@ public class EmailForm extends javax.swing.JPanel {
         });
 
         loginButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        loginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Mail.png"))); // NOI18N
         loginButton.setFocusable(false);
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,31 +231,54 @@ public class EmailForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
-        try {
-            if (emptyFields()) {
-                throw new Exception("Required fields are empty!");
+        // Create a loading dialog while sending the email in the background.
+        JOptionPane loadingPaneDialog = new JOptionPane("Sending...", JOptionPane.INFORMATION_MESSAGE, JOptionPane.PLAIN_MESSAGE, LOADING_ICON);
+        final JDialog LOADING_DIALOG = loadingPaneDialog.createDialog(this, "Dialog");
+        
+        new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                try {
+                    if (emptyFields()) {
+                        throw new Exception("Required fields are empty!");
+                    }
+
+                    // Construct the list of recipient emails.
+                    ArrayList<String> to = new ArrayList<String>();
+                    Scanner recipientsScanner = new Scanner(recipientsField.getText());
+                    while (recipientsScanner.hasNext()) {
+                        to.add(recipientsScanner.next());
+                    }
+                    recipientsScanner.close();
+                    
+                    // Gather other email information from the form.
+                    String from = service.users().getProfile("me").execute().getEmailAddress();
+                    String subject = subjectField.getText();
+                    String bodyText = bodyArea.getText();
+
+                    // Create and send the constructed email.
+                    MimeMessage email = createEmail(to, from, subject, bodyText);
+                    sendMessage(service, "me", email);
+
+                    // Notify user of successfull send and clear the form.
+                    infoMessage("Email sent successfully!");
+                    clearAllFields();
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                } catch (MessagingException me) {
+                    me.printStackTrace();
+                } catch (Exception e) {
+                    errorMessage(e.getMessage());
+                }
+                return null;
             }
             
-            // Gather email contents from form and from authorization.
-            String to = recipientsField.getText();
-            String from = service.users().getProfile("me").execute().getEmailAddress();
-            String subject = subjectField.getText();
-            String bodyText = bodyArea.getText();
+            protected void done() {
+                LOADING_DIALOG.dispose();
+            };
+        }.execute();
 
-            // Create and send the constructed email.
-            MimeMessage email = createEmail(to, from, subject, bodyText);
-            sendMessage(service, "me", email);
-            
-            // Notify user of successfull send and clear the form.
-            infoMessage("Email sent successfully!");
-            clearAllFields();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        } catch (MessagingException me) {
-            me.printStackTrace();
-        } catch (Exception e) {
-            errorMessage(e.getMessage());
-        }
+        LOADING_DIALOG.setVisible(true);
     }//GEN-LAST:event_sendButtonActionPerformed
     
     private void addRecipientsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRecipientsButtonActionPerformed
@@ -256,20 +286,36 @@ public class EmailForm extends javax.swing.JPanel {
     }//GEN-LAST:event_addRecipientsButtonActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        try {
-            // Build a new authorized API client service.
-            final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-            service = new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
-                    .setApplicationName(APPLICATION_NAME)
-                    .build();
-            // Set the sender field to the email address that was just logged into.
-            senderField.setText(service.users().getProfile("me").execute().getEmailAddress());
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-            errorMessage("User authorization failed!");
-        } catch (GeneralSecurityException gse) {
-            gse.printStackTrace();
-        }
+        // Create a loading dialog while awaiting authorization in the background.
+        JOptionPane loadingPaneDialog = new JOptionPane("Awaiting authentication...", JOptionPane.INFORMATION_MESSAGE, JOptionPane.PLAIN_MESSAGE, LOADING_ICON);
+        final JDialog LOADING_DIALOG = loadingPaneDialog.createDialog(this, "Dialog");
+        
+        new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                try {
+                    // Build a new authorized API client service.
+                    final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+                    service = new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+                            .setApplicationName(APPLICATION_NAME)
+                            .build();
+                    // Set the sender field to the email address that was just logged into.
+                    senderField.setText(service.users().getProfile("me").execute().getEmailAddress());
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                    errorMessage("User authentication failed!");
+                } catch (GeneralSecurityException gse) {
+                    gse.printStackTrace();
+                }
+                return null;
+            }
+            
+            protected void done() {
+                LOADING_DIALOG.dispose();
+            };
+        }.execute();
+
+        LOADING_DIALOG.setVisible(true);
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void bodyAreaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bodyAreaKeyPressed
@@ -304,22 +350,24 @@ public class EmailForm extends javax.swing.JPanel {
     
     /**
      * Create a MimeMessage using the parameters provided.
-     * @param to email address of the receiver
+     * @param to list of email addresses of the receivers
      * @param from email address of the sender, the mailbox account
      * @param subject subject of the email
      * @param bodyText body text of the email
      * @return the MimeMessage to be used to send email
      * @throws MessagingException
      */
-    public static MimeMessage createEmail(String to, String from, String subject, String bodyText) throws MessagingException {
+    public static MimeMessage createEmail(ArrayList<String> to, String from, String subject, String bodyText) throws MessagingException {
         Properties props = new Properties();
         Session session = Session.getDefaultInstance(props, null);
 
         MimeMessage email = new MimeMessage(session);
 
         email.setFrom(new InternetAddress(from));
-        email.addRecipient(javax.mail.Message.RecipientType.TO,
-                new InternetAddress(to));
+        for (String recipientEmail : to) {
+            email.addRecipient(javax.mail.Message.RecipientType.TO,
+                    new InternetAddress(recipientEmail));
+        }
         email.setSubject(subject);
         email.setText(bodyText);
         return email;
