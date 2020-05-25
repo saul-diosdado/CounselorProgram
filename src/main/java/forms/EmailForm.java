@@ -306,6 +306,7 @@ public class EmailForm extends javax.swing.JPanel {
                     errorMessage("User authentication failed!");
                 } catch (GeneralSecurityException gse) {
                     gse.printStackTrace();
+                    errorMessage("User authentication failed!");
                 }
                 return null;
             }
@@ -344,7 +345,7 @@ public class EmailForm extends javax.swing.JPanel {
                 .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
                 .setAccessType("online")
                 .build();
-        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
+        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(-1).build();
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
     
