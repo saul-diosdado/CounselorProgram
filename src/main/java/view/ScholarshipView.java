@@ -160,7 +160,7 @@ public class ScholarshipView extends javax.swing.JPanel {
         genderCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N/A", "Male", "Female" }));
         genderCombo.setEnabled(false);
 
-        gpaLabel.setText("Minimum GPA");
+        gpaLabel.setText("Min GPA");
 
         gpaField.setEditable(false);
 
@@ -172,56 +172,62 @@ public class ScholarshipView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(notesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(notesPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ethnicityLabel)
-                            .addComponent(genderLabel)
-                            .addComponent(gpaLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(genderLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ethnicityLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(gpaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(gpaField, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ethnicityCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(genderCombo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sponsorField)
-                    .addComponent(sponsorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rewardLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rewardField)
-                    .addComponent(notesPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-                    .addComponent(nameField))
+                            .addComponent(ethnicityCombo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(genderCombo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(gpaField, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(sponsorLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                                .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(rewardLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(sponsorField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nameField)
+                            .addComponent(rewardField, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(sponsorLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sponsorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rewardLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rewardField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameLabel)
+                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ethnicityLabel)
-                    .addComponent(ethnicityCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(sponsorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sponsorLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rewardLabel)
+                    .addComponent(rewardField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ethnicityCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ethnicityLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(genderLabel)
                     .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(gpaLabel)
                     .addComponent(gpaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(notesLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(notesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                .addComponent(notesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -264,7 +270,7 @@ public class ScholarshipView extends javax.swing.JPanel {
             .addComponent(studentScrollPane, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(filterPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(resultsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+                .addComponent(resultsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
                 .addContainerGap())
         );
         filterPanelLayout.setVerticalGroup(
@@ -285,7 +291,7 @@ public class ScholarshipView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(sidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
-                .addComponent(filterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
+                .addComponent(filterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -322,42 +328,41 @@ public class ScholarshipView extends javax.swing.JPanel {
                 filteredStudents.add(Main.studentData.get(i));
             }
             
-            if (!scholarship.getEthnicity().equals("N/A")) {
-                for (int i = 0; i < filteredStudents.size(); i++) {
-                    if (!filteredStudents.get(i).getEthnicity().equals(scholarship.getEthnicity())) {
-                        removedStudents.add(filteredStudents.get(i));
+            String reqEthnicity = scholarship.getEthnicity();
+            String reqGender = scholarship.getGender();
+            String reqGPA = scholarship.getGPA();
+            
+            if (!reqEthnicity.equals("N/A")) {
+                for (int i = filteredStudents.size() - 1; i > 0; i--) {
+                    if (filteredStudents.get(i).getEthnicity().equals(reqEthnicity)) {
+                        filteredStudents.remove(i);
                     }
                 }
-                filteredStudents.removeAll(removedStudents);
-                removedStudents.clear();
             }
             
+            
+            
             if (!scholarship.getGender().equals("N/A")) {
-                for (int i = 0; i < filteredStudents.size(); i++) {
-                    if (!filteredStudents.get(i).getGender().equals(scholarship.getGender())) {
-                        removedStudents.add(filteredStudents.get(i));
+                for (int i = filteredStudents.size() - 1; i > 0; i--) {
+                    if (!filteredStudents.get(i).getGender().equals(reqGender)) {
+                        filteredStudents.remove(i);
                     }
                 }
-                filteredStudents.removeAll(removedStudents);
-                removedStudents.clear();
             }
             
             if (scholarship.getGPA() != "0.00") {
-                double gpa = Double.parseDouble(scholarship.getGPA());
-                for (int i = 0; i < filteredStudents.size(); i++) {
+                double gpa = Double.parseDouble(reqGPA);
+                for (int i = filteredStudents.size() - 1; i > 0; i--) {
                     if (gpa > Double.parseDouble(filteredStudents.get(i).getGPA())) {
-                        removedStudents.add(filteredStudents.get(i));
+                        filteredStudents.remove(i);
                     }
                 }
-                filteredStudents.removeAll(removedStudents);
-                removedStudents.clear();
             }
             
             studentPanel.removeAll();
             for (int i = 0; i < filteredStudents.size(); i++) {
                 studentPanel.add(new CardButton(filteredStudents.get(i)));
             }
-            
             studentPanel.updateUI();
             resultsLabel.setText("Qualifying Students: " + filteredStudents.size());
         } catch(NullPointerException npe) {
@@ -374,6 +379,7 @@ public class ScholarshipView extends javax.swing.JPanel {
         }
         studentPanel.updateUI();
         scholarshipCombo.setSelectedIndex(-1);
+        scholarship = null;
         resultsLabel.setText("Qualifying Students: " + Main.studentData.size());
         reset();
     }//GEN-LAST:event_resetButtonActionPerformed
@@ -384,7 +390,7 @@ public class ScholarshipView extends javax.swing.JPanel {
             for (int i = 0; i < Main.scholarData.size(); i++) {
                 if (Main.scholarData.get(i).getName().equals(name)) {
                     scholarship = Main.scholarData.get(i);
-                    setScholarship(scholarship);
+                    update();
                     break;
                 }
             }
@@ -393,11 +399,6 @@ public class ScholarshipView extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_scholarshipComboActionPerformed
 
-    public void setScholarship(Scholarship scholarship) {
-        this.scholarship = scholarship;
-        this.update();
-    }
-    
     public void reset() {
         nameField.setText("");
         sponsorField.setText("");

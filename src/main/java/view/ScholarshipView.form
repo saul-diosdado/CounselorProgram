@@ -25,7 +25,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="sidePanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-              <Component id="filterPanel" pref="447" max="32767" attributes="0"/>
+              <Component id="filterPanel" pref="432" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -191,30 +191,41 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="notesLabel" max="32767" attributes="0"/>
+                          <Component id="notesPane" alignment="1" pref="272" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="ethnicityLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="genderLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="gpaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="genderLabel" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="ethnicityLabel" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="gpaLabel" min="-2" pref="51" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="gpaField" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="ethnicityCombo" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="ethnicityCombo" alignment="1" max="32767" attributes="0"/>
                                   <Component id="genderCombo" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="gpaField" alignment="1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="nameLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="sponsorField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="sponsorLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="rewardLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="rewardField" max="32767" attributes="0"/>
-                          <Component id="notesPane" alignment="1" pref="272" max="32767" attributes="0"/>
-                          <Component id="nameField" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="sponsorLabel" alignment="0" pref="45" max="32767" attributes="0"/>
+                                      <Component id="nameLabel" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="rewardLabel" min="-2" pref="51" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="sponsorField" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="nameField" max="32767" attributes="0"/>
+                                  <Component id="rewardField" alignment="1" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -224,36 +235,39 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="nameLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="nameField" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                      <Component id="sponsorLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="sponsorField" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="rewardLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="rewardField" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="nameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="nameField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="ethnicityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ethnicityCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="sponsorField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="sponsorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="rewardLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rewardField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="ethnicityCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ethnicityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="genderLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="genderCombo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="gpaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="gpaField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="notesLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="notesPane" pref="194" max="32767" attributes="0"/>
+                      <Component id="notesPane" pref="229" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -361,7 +375,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="gpaLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Minimum GPA"/>
+                <Property name="text" type="java.lang.String" value="Min GPA"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="gpaField">
@@ -386,7 +400,7 @@
               <Component id="studentScrollPane" alignment="1" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="resultsLabel" pref="435" max="32767" attributes="0"/>
+                  <Component id="resultsLabel" pref="420" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
