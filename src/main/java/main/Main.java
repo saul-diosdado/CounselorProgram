@@ -15,7 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Combines all of the forms and views of the project into a tabbed pane.
+ * 
  * @author Saul Diosdado
  */
 public class Main extends javax.swing.JFrame {
@@ -95,6 +96,9 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * Fills the studentData ArrayList with Student information from the samplestudents.txt.
+     */
     private void startSampleDatabase() {
         Scanner scan = null;
         try {
@@ -121,6 +125,12 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Builds the studentData and scholarData ArrayLists from the two student data
+     * file and the scholar data file. These files are written with the ObjectOutputStream
+     * by writing the Serializable studentData and scholarData ArrayLists.
+     * @see closeDatabase()
+     */
     private void startDatabase() {
         FileInputStream fileIS;
         ObjectInputStream objectIS = null;
@@ -131,7 +141,7 @@ public class Main extends javax.swing.JFrame {
             objectIS = new ObjectInputStream(fileIS);
             studentData = (ArrayList<Student>) objectIS.readObject();
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Database file not found.", ex);
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Student data file not found.", ex);
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -144,7 +154,7 @@ public class Main extends javax.swing.JFrame {
             objectIS = new ObjectInputStream(fileIS);
             scholarData = (ArrayList<Scholarship>) objectIS.readObject();
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Scholarship file not found.", ex);
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Scholarship data file not found.", ex);
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -152,6 +162,11 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Writes the Serializable studentData and scholarData ArrayLists to the student
+     * data and scholar data files.
+     * @see startDatabase()
+     */
     private void closeDatabase() {
         FileOutputStream fileOS;
         ObjectOutputStream objectOS = null;

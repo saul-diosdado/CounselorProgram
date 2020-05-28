@@ -43,6 +43,7 @@ import javax.swing.SwingWorker;
  * file with the user's login credentials.
  * Many of the methods implemented here are directly from the Google Gmail API
  * documentation.
+ * 
  * @author Saul Diosdado
  */
 public class EmailForm extends javax.swing.JPanel {
@@ -61,7 +62,6 @@ public class EmailForm extends javax.swing.JPanel {
     
     /**
      * Basic constructor.
-     * @param parent the parent component.
      */
     public EmailForm() {
         initComponents();
@@ -327,6 +327,7 @@ public class EmailForm extends javax.swing.JPanel {
 
     /**
      * Creates an authorized Credential object.
+     * 
      * @param HTTP_TRANSPORT The network HTTP Transport.
      * @return An authorized Credential object.
      * @throws IOException If the credentials.json file cannot be found.
@@ -351,6 +352,7 @@ public class EmailForm extends javax.swing.JPanel {
     
     /**
      * Create a MimeMessage using the parameters provided.
+     * 
      * @param to list of email addresses of the receivers
      * @param from email address of the sender, the mailbox account
      * @param subject subject of the email
@@ -376,6 +378,7 @@ public class EmailForm extends javax.swing.JPanel {
     
     /**
      * Create a message from an email.
+     * 
      * @param emailContent Email to be set to raw of message
      * @return a message containing a base64url encoded email
      * @throws IOException
@@ -393,6 +396,7 @@ public class EmailForm extends javax.swing.JPanel {
 
     /**
      * Send an email from the user's mailbox to its recipient.
+     * 
      * @param service Authorized Gmail API instance.
      * @param userId User's email address. The special value "me"
      * can be used to indicate the authenticated user.

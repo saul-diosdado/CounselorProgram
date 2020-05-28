@@ -7,7 +7,8 @@ import javax.swing.JOptionPane;
 import project.Scholarship;
 
 /**
- *
+ * Dialog interface which allows the user to set the requirements of the scholarship.
+ * 
  * @author Saul Diosdado
  */
 public class RequirementsDialog extends javax.swing.JDialog {
@@ -17,11 +18,24 @@ public class RequirementsDialog extends javax.swing.JDialog {
     private double gpaValue = 0.00;
     private Scholarship scholarship;
 
+    /**
+     * Builds the dialog.
+     * 
+     * @param parent the parent form of this dialog
+     * @param modal boolean for allowing other windows to be focused
+     */
     public RequirementsDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
     
+    /**
+     * Builds the dialog.
+     * 
+     * @param parent the parent form of this dialog
+     * @param modal boolean for allowing other windows to be focused
+     * @param scholarship the scholarship to set the requirements for
+     */
     public RequirementsDialog(java.awt.Frame parent, boolean modal, Scholarship scholarship) {
         super(parent, modal);
         initComponents();
@@ -30,6 +44,7 @@ public class RequirementsDialog extends javax.swing.JDialog {
     
     /**
      * Displaying the dialog and updating the relative location of the dialog.
+     * 
      * @param parent the component to be relative to.
      */
     public void display(Component parent) {

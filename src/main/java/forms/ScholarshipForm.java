@@ -8,12 +8,16 @@ import project.Scholarship;
 /**
  * Form used to create a new scholarship which will be added to the scholarship
  * database.
+ * 
  * @author Saul Diosdado
  */
 public class ScholarshipForm extends javax.swing.JPanel {
 
     private Scholarship scholarship = new Scholarship();
     
+    /**
+     * Builds the form.
+     */
     public ScholarshipForm() {
         initComponents();
     }

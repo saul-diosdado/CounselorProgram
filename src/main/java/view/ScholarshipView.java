@@ -7,13 +7,21 @@ import project.Scholarship;
 import project.Student;
 
 /**
- *
+ * View for selecting a Scholarship from the scholarData list. This view displays
+ * the information and requirements of the scholarship and shows all of the students
+ * that qualify for the scholarship.
+ * 
  * @author Saul Diosdado
  */
 public class ScholarshipView extends javax.swing.JPanel {
     
     private Scholarship scholarship;
 
+    /**
+     * Creates the view and fills the studentPanel (which will display all of
+     * the students that qualify for a particular scholarship) with all of the
+     * students in the studentData list.
+     */
     public ScholarshipView() {
         initComponents();
         for (int i = 0; i < Main.scholarData.size(); i++) {
@@ -58,7 +66,7 @@ public class ScholarshipView extends javax.swing.JPanel {
         studentPanel = new javax.swing.JPanel();
         resultsLabel = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(0, 0));
+        setPreferredSize(new java.awt.Dimension(765, 600));
 
         sidePanel.setMaximumSize(new java.awt.Dimension(300, 32767));
         sidePanel.setMinimumSize(new java.awt.Dimension(300, 0));
@@ -227,7 +235,7 @@ public class ScholarshipView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(notesLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(notesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                .addComponent(notesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -270,7 +278,7 @@ public class ScholarshipView extends javax.swing.JPanel {
             .addComponent(studentScrollPane, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(filterPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(resultsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                .addComponent(resultsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
                 .addContainerGap())
         );
         filterPanelLayout.setVerticalGroup(
@@ -291,7 +299,7 @@ public class ScholarshipView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(sidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
-                .addComponent(filterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                .addComponent(filterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -299,8 +307,8 @@ public class ScholarshipView extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(sidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
-                    .addComponent(filterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE))
+                    .addComponent(sidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
+                    .addComponent(filterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -399,6 +407,9 @@ public class ScholarshipView extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_scholarshipComboActionPerformed
 
+    /**
+     * Makes all of the fields blank and selects the first item for the combo boxes.
+     */
     public void reset() {
         nameField.setText("");
         sponsorField.setText("");
@@ -410,6 +421,10 @@ public class ScholarshipView extends javax.swing.JPanel {
         this.updateUI();
     }
     
+    /**
+     * Updates the fields and combo boxes with the information provided by
+     * the selected Scholarship.
+     */
     private void update() {
         nameField.setText(scholarship.getName());
         sponsorField.setText(scholarship.getSponsor());

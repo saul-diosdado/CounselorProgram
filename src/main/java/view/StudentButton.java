@@ -18,6 +18,7 @@ public class StudentButton extends javax.swing.JPanel {
     /**
      * When given the Student class, initializes the button with the student's
      * last name, first name and a label containing the student's ID number.
+     * 
      * @param parent the parent component.
      * @param student the student for the created button.
      */
@@ -29,6 +30,7 @@ public class StudentButton extends javax.swing.JPanel {
     
     /**
      * Checks the selected state of the JCheckBox.
+     * 
      * @return true if the box is selected, false otherwise.
      */
     public boolean isSelectedBox() {

@@ -9,7 +9,9 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Form questionnaire to determine the number of entries the student will receive
+ * for the senior raffle. 
+ * 
  * @author Saul Diosdado
  */
 public class SeniorForm extends javax.swing.JPanel {
@@ -364,6 +366,11 @@ public class SeniorForm extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_submitButtonActionPerformed
     
+    /**
+     * Returns a string of the current date.
+     * 
+     * @return String date in the form MM/dd/yyyy HH:mm
+     */
     private String getDate() {
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
         Date date = new Date();

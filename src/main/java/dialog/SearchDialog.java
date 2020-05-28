@@ -11,6 +11,7 @@ import view.StudentButton;
 
 /**
  * Dialog used as a GUI interface to search through the student database.
+ * 
  * @author Saul Diosdado
  */
 public class SearchDialog extends javax.swing.JDialog {
@@ -27,6 +28,7 @@ public class SearchDialog extends javax.swing.JDialog {
     
     /**
      * Creates the parent class.
+     * 
      * @param parent the parent component.
      * @param modal the modality of the dialog.
      */
@@ -37,6 +39,7 @@ public class SearchDialog extends javax.swing.JDialog {
     
     /**
      * Creates the parent class and sets the return value of the dialog.
+     * 
      * @param parent the parent component.
      * @param modal the modality of the dialog.
      * @param returnValue the type of return returned by this dialog.
@@ -50,6 +53,7 @@ public class SearchDialog extends javax.swing.JDialog {
     /**
      * Sets the field for which the return type of this class will be
      * written to.
+     * 
      * @param returnField the field to be written to.
      */
     public void setReturnField(JTextField returnField) {
@@ -59,6 +63,7 @@ public class SearchDialog extends javax.swing.JDialog {
     /**
      * Sets the type of return returned by this program to be written in
      * the return field.
+     * 
      * @param returnValue the type of return.
      */
     public void setReturnValue(int returnValue) {
@@ -67,6 +72,7 @@ public class SearchDialog extends javax.swing.JDialog {
     
     /**
      * Displaying the dialog and updating the relative location of the dialog.
+     * 
      * @param parent the component to be relative to.
      */
     public void display(Component parent) {

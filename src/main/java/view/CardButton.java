@@ -8,7 +8,9 @@ import main.Main;
 import project.Student;
 
 /**
- *
+ * Button used to display basic information of a Student and when clicked can show
+ * more information or allow the user to edit the information of the student.
+ * 
  * @author Saul Diosdado
  */
 public class CardButton extends javax.swing.JPanel {
@@ -19,7 +21,9 @@ public class CardButton extends javax.swing.JPanel {
     /**
      * Creates a card button with the information of the given student.
      * Also serves as a button.
+     * 
      * @param student the student information to be displayed.
+     * @param studentView the StudentView form.
      */
     public CardButton(Student student, StudentView studentView) {
         this.student = student;
@@ -27,6 +31,11 @@ public class CardButton extends javax.swing.JPanel {
         initComponents();
     }
     
+    /**
+     * Creates a card button with the information of the given student.
+     * 
+     * @param student the student information to be displayed
+     */
     public CardButton(Student student) {
         this.student = student;
         initComponents();
@@ -140,6 +149,9 @@ public class CardButton extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_formMousePressed
 
+    /**
+     * Updates the button with the information of the Student.
+     */
     private void update() {
         nameLabel.setText(student.getName());
         idLabel.setText("ID#: " + student.getID());

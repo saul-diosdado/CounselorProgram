@@ -5,6 +5,7 @@ import project.Student;
 
 /**
  * Dialog used to display a student's information.
+ * 
  * @author Saul Diosdado
  */
 public class StudentDialog extends javax.swing.JDialog {
@@ -14,6 +15,7 @@ public class StudentDialog extends javax.swing.JDialog {
     /**
      * Creates the student dialog and fills the information based on the given
      * student.
+     * 
      * @param parent the parent component.
      * @param modal the modality of the dialog.
      * @param student the student for which to display information.
@@ -26,6 +28,7 @@ public class StudentDialog extends javax.swing.JDialog {
     
     /**
      * Displaying the dialog and updating the relative location of the dialog.
+     * 
      * @param parent the component to be relative to.
      */
     public void display(Component parent) {

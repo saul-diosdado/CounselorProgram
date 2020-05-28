@@ -10,6 +10,7 @@ import project.Student;
 
 /**
  * Dialog used to display a student's information.
+ * 
  * @author Saul Diosdado
  */
 public class StudentEditDialog extends javax.swing.JDialog {
@@ -28,6 +29,7 @@ public class StudentEditDialog extends javax.swing.JDialog {
     
     /**
      * Displaying the dialog and updating the relative location of the dialog.
+     * 
      * @param parent the component to be relative to.
      */
     public void display(Component parent) {

@@ -7,18 +7,23 @@ import view.StudentView;
 
 /**
  * Form for creating a new student which will be added to the student database.
+ * 
  * @author Saul Diosdado
  */
 public class StudentForm extends javax.swing.JPanel {
     
     private StudentView studentView;
     
+    /**
+     * Builds the form components.
+     */
     public StudentForm() {
         initComponents();
     }
     
     /**
      * Sets the student view.
+     * 
      * @param studentView the student view to be updated.
      */
     public void setStudentView(StudentView studentView) {
