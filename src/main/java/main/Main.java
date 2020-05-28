@@ -23,9 +23,9 @@ public class Main extends javax.swing.JFrame {
     public static ArrayList<Student> studentData = new ArrayList<Student>();
     public static ArrayList<Scholarship> scholarData = new ArrayList<Scholarship>();
     
-    private final File STUDENTS_FILE = new File("studentdata.txt");
-    private final File SCHOLAR_FILE = new File("scholardata.txt");
-    private final File SAMPLE_FILE = new File("samplestudents.txt");
+    private final File STUDENTS_FILE = new File("data/studentdata.txt");
+    private final File SCHOLAR_FILE = new File("data/scholardata.txt");
+    private final File SAMPLE_FILE = new File("data/samplestudents.txt");
     
     private final boolean SAMPLE = true;
     
